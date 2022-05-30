@@ -22,19 +22,26 @@ Problem:
 Solution (Dynamic Programming):
     Use a hashmap to keep tracks of previous values and indices (val -> index). For each number in the list, calculate the difference between its value and the target value. If the difference exists in the hashmap, you found the answer.   
 
-Complexity
-    Running Time: O(n)
-    Space Complexity: O(n)
+Complexity:
+    Time: O(n)
+    Space: O(n)
 """
+
 
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
+        # Use hashmap to keep track of previous values (value -> index).
         hashmap = {}
 
+        # Iterate through all values.
         for i, num in enumerate(nums):
+
+            # Calculate the difference.
             diff = target - num
 
+            # If the difference exists previously, return the two indices.
             if diff in hashmap.keys():
                 return [hashmap[diff], i]
 
+            # Add the current value to the hashmap.
             hashmap[num] = i
