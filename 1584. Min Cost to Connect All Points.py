@@ -28,7 +28,6 @@ Complexity:
 """
 
 import heapq
-from math import dist
 
 # Prim's Algorithm
 class Solution:
