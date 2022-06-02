@@ -28,25 +28,26 @@ Complexity:
 """
 
 import heapq
+from math import dist
 
 # Prim's Algorithm
 class Solution:
     def minCostConnectPoints(self, points: list[list[int]]) -> int:
-        n = len(points)
+        num_points = len(points)
 
-        # Generate edges.
-        edges = {i: [j for j in range(n)] for i in range(n)}
+        # Generate a list of nodes that any given node can visit.
+        edges = {i: [j for j in range(num_points)] for i in range(num_points)}
 
         # Performs Prim's algorithm
         cost = 0
         min_heap = [[0, 0]]  # Cost, Node
         visited = set()
 
-        while len(visited) != n:
-            # Pop a minimum edge from the min heap
+        while len(visited) != num_points:
+            # Pop a node with minimum distance from visited node
             dst, node = heapq.heappop(min_heap)
 
-            # If the edge connects to unvisited node, visit it
+            # If such node hasn't been visited
             if not node in visited:
 
                 # Add distance to the cost
@@ -55,25 +56,55 @@ class Solution:
                 # Add the node to the visited list
                 visited.add(node)
 
-                # Add all edges that connect to unvisited neighbors to the min heap
+                # Add all unvisted neighboring nodes and their distance to the min heap.
                 for neighbor in edges[node]:
                     if not neighbor in visited:
-
+                        dst = abs(points[node][0] - points[neighbor][0]) + abs(
+                            points[node][1] - points[neighbor][1]
+                        )
                         # Push edges to the min heap [distance, node]
                         heapq.heappush(
-                            min_heap,
-                            [
-                                abs(points[node][0] - points[neighbor][0])
-                                + abs(points[node][1] - points[neighbor][1]),
-                                neighbor,
-                            ],
+                            min_heap, [dst, neighbor],
                         )
+
         return cost
 
 
-# Kruskal's Algorithm
+# Kruskal's Algorithm - too slow for leetcode but it does work
 class Solution:
     def minCostConnectPoints(self, points: list[list[int]]) -> int:
+
+        # Implement Disjoint-Set data structure
+        class disjoint:
+            def __init__(self, n):
+                # Keep track of each node's parent
+                self.parents = [i for i in range(n)]
+
+                # Keep track of the rank. A node rank increases if we use it as a parent for another node
+                self.ranks = [1] * n
+
+            def find(self, node):
+                # Recursively find the parent node of a given node
+                if self.parents[node] == node:
+                    return node
+                return self.find(self.parents[node])
+
+            def union(self, node_1, node_2):
+                # Check if you can union two nodes. Union is only possible if each node belongs to a seperate subtree
+                parent_1 = self.find(node_1)
+                parent_2 = self.find(node_2)
+
+                # Union the two trees
+                if parent_1 != parent_2:
+                    if self.ranks[parent_1] <= self.ranks[parent_2]:
+                        self.parents[parent_1] = parent_2
+                        self.ranks[parent_2] += 1
+                    else:
+                        self.parents[parent_2] = parent_1
+                        self.ranks[parent_1] += 1
+                    return True
+                return False
+
         # Generate all edges
         edges = []  # [distance, start, end]
 
@@ -83,28 +114,19 @@ class Solution:
                     dst = abs(points[i][0] - points[j][0]) + abs(
                         points[i][1] - points[j][1]
                     )
-                    edges.append([dst, i, j])
-
-        # Sort edges based on distance and reserve it
-        edges.sort(key=lambda e: e[0], reverse=True)
+                    heapq.heappush(edges, [dst, i, j])
 
         # Perform Kruskal's algorithm
-        disjoint = [i for i in range(len(points))]
-
-        def find(node):
-            global disjoint
-
-            if disjoint[node] == node:
-                return node
-
-            find(disjoint[node])
+        dis = disjoint(len(points))
+        cost = 0
 
         while edges:
-            dst, start, end = edges.pop()
+            dst, start, end = heapq.heappop(edges)
+            if dis.union(start, end):
+                cost += dst
 
-            
-            
+        return cost
 
 
-print(Solution().minCostConnectPoints([[0, 0], [2, 2], [3, 10], [5, 2], [7, 0]]))
+print(Solution().minCostConnectPoints([[3,12],[-2,5],[-4,1]]))
 
