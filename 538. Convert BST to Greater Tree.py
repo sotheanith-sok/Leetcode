@@ -25,13 +25,13 @@ Complexity:
 """
 
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 class Solution:
-    def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    def convertBST(self, root: list[TreeNode]) -> list[TreeNode]:
         def dps(node, total):
 
             # If there is no node, return the total
