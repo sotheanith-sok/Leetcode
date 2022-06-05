@@ -22,7 +22,7 @@ Problem:
     We need to wait until time 16 so that (0, 0) and (4, 4) are connected.
 
 Solution (Dijkstra's Algorithm):
-    We will perform a bfs search on the graph. To start with it, we will add the (0,0) node and its cost to the min heap (sorted by the cost). Until we reach the (n-1,n-1) node, we pop a node from the heap nad mark it as visited. Then, for every unvisited neighbor, we pick the max between the current node cost and the neighbor node cost and add that neighbor node to the min heap. Repeat the process.   
+    We will perform a bfs search on the graph. To start with it, we will add the (0,0) node and its cost to the min heap (sorted by the cost). Until we reach the (n-1,n-1) node, we pop a node from the heap a. Then, for every unvisited neighbor, we pick the max between the current node cost and the neighbor node cost and add that neighbor node to the min heap and mark it as visited. Repeat the process.   
 
 Problem:
     Time: O(n**2)
@@ -53,6 +53,9 @@ class Solution:
             # Pop the least cost node from the heap
             time, row, col = heapq.heappop(heap)
 
+            # # If we marks a node when we visit it only, the size of the heap will increase exponentially.
+            # visited.add((row, col))
+
             # If we reach (n-1, n-1) node, return the cost
             if row == N - 1 and col == N - 1:
                 return time
@@ -74,5 +77,48 @@ class Solution:
                         heap, [max(time, grid[neiRow][neiCol]), neiRow, neiCol]
                     )
 
-                    # Mark neighbors as visited right away to avoid adding it multiples time into the heap.
+                    # We need to mark all neighbors as visted right away because, without marking it here, mutiple nodes can add their common neighbors multiple time into the heap. If we marks a node when we visit it only, the size of the heap will increase exponentially.
                     visited.add((neiRow, neiCol))
+
+
+class Solution:
+    def swimInWater(self, grid: list[list[int]]) -> int:
+
+        N = len(grid)
+
+        # Create a cache to keep track of the cost of all nodes. Assume the cost of -1 for all unvisited node.
+        cache = [[-1 for _ in range(N)] for _ in range(N)]
+
+        # Create a heap and add the first node into it.
+        heap = [[grid[0][0], 0, 0]]
+
+        # Create a varaible to keep track of the previously largest cost
+        prev = grid[0][0]
+
+        # A helper list for direction
+        directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+
+        while heap:
+
+            # Pop the least cost from the heap
+            val, row, col = heapq.heappop(heap)
+
+            # Pick the max between the previously largest cost and current cost and save it to the cache.
+            prev = cache[row][col] = max(prev, val)
+
+            # If we reach the end node, break out of the loop.
+            if row == N - 1 and col == N - 1:
+                break
+
+            # Add all unvisited neighbors to the cache.
+            for d_row, d_col in directions:
+                nei_row, nei_col = row + d_row, col + d_col
+                if (
+                    0 <= nei_row < N
+                    and 0 <= nei_col < N
+                    and cache[nei_row][nei_col] < 0
+                ):
+                    heapq.heappush(heap, [grid[nei_row][nei_col], nei_row, nei_col])
+
+        return cache[-1][-1]
+
