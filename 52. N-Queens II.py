@@ -63,5 +63,3 @@ class Solution:
         backtrack(0, cols, pos_diag, neg_diag)
         return count
 
-
-print(Solution().totalNQueens(1000))
