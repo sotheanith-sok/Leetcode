@@ -33,8 +33,8 @@ A collection of leetcode solution implemeted with native python library only.
 - [Python][Python]
 
 
-<!-- Authors information -->
-## Author
+<!-- Collaborators information -->
+## Collaborators
 - [Sotheanith Sok][github]
 
 
@@ -52,23 +52,23 @@ Special thank to
 
 <!-- References -->
 <!-- Shield Icons-->
-[contributors_shield]: https://img.shields.io/github/contributors/sotheanith-sok/Leetcode.svg?style=for-the-badge
-[forks_shield]: https://img.shields.io/github/forks/sotheanith-sok/Leetcode.svg?style=for-the-badge
-[stars_shield]: https://img.shields.io/github/stars/sotheanith-sok/Leetcode.svg?style=for-the-badge
-[issues_shield]: https://img.shields.io/github/issues/sotheanith-sok/Leetcode.svg?style=for-the-badge
-[license_shield]: https://img.shields.io/github/license/sotheanith-sok/Leetcode.svg?style=for-the-badge
+[contributors_shield]: https://img.shields.io/github/contributors/sotheanithsok/Leetcode.svg?style=for-the-badge
+[forks_shield]: https://img.shields.io/github/forks/sotheanithsok/Leetcode.svg?style=for-the-badge
+[stars_shield]: https://img.shields.io/github/stars/sotheanithsok/Leetcode.svg?style=for-the-badge
+[issues_shield]: https://img.shields.io/github/issues/sotheanithsok/Leetcode.svg?style=for-the-badge
+[license_shield]: https://img.shields.io/github/license/sotheanithsok/Leetcode.svg?style=for-the-badge
 [linkedin_shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 
 <!-- Shield URLs -->
-[contributors_url]: https://github.com/sotheanith-sok/Leetcode/graphs/contributors
-[forks_url]: https://github.com/sotheanith-sok/Leetcode/network/members
-[stars_url]: https://github.com/sotheanith-sok/Leetcode/stargazers
-[issues_url]: https://github.com/sotheanith-sok/Leetcode/issues
-[license_url]: https://github.com/sotheanith-sok/Leetcode/blob/master/LICENSE
+[contributors_url]: https://github.com/sotheanithsok/Leetcode/graphs/contributors
+[forks_url]: https://github.com/sotheanithsok/Leetcode/network/members
+[stars_url]: https://github.com/sotheanithsok/Leetcode/stargazers
+[issues_url]: https://github.com/sotheanithsok/Leetcode/issues
+[license_url]: https://github.com/sotheanithsok/Leetcode/blob/master/LICENSE
 [linkedin_url]: https://www.linkedin.com/in/sotheanith-sok-969ab0b3/
 
 <!-- Other URLs -->
-[github]: https://github.com/sotheanith-sok
+[github]: https://github.com/sotheanithsok
 [course]: http://catalog.csulb.edu/preview_course_nopop.php?catoid=5&coid=40849
 [Best-README-Template]: https://github.com/othneildrew/Best-README-Template
 [Python]: https://www.python.org/
