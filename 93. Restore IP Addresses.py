@@ -17,7 +17,7 @@ Problem:
     Input: s = "101023"
     Output: ["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]
 
-Solution:
+Solution (Backtrack):
     We can solve this problem with backtracking. At each iteration, we extract 1 to 3 digits from the string and append a dot at the end of it. The remaining string will be its own sub problems. We know that we found a valid ip address if we used exactly 4 dots and we reach the end of the string. Else, if we use more than 4 dots or the potential digits create value bigger than 255 or it has a leading zero, we stop and backtrack.    
 
 Complexity:
@@ -35,7 +35,7 @@ class Solution:
 
         res = []
 
-        def backtracking(i, dots, ip):
+        def backtrack(i, dots, ip):
             # If we used 4 dots and reach the end of the string, we found a valid ip.
             # 122.555.666.777. -> 122.555.666.777
             if dots == 4 and i == len(s):
@@ -50,8 +50,8 @@ class Solution:
 
                 # Only generate a sub problem if there is no leading zero and the potential digits are less than or equal to 255. i==j ensures that a single 0 digit will be accepted.
                 if int(s[i : j + 1]) <= 255 and (i == j or s[i] != "0"):
-                    backtracking(j + 1, dots + 1, ip + s[i : j + 1] + ".")
+                    backtrack(j + 1, dots + 1, ip + s[i : j + 1] + ".")
 
-        backtracking(0, 0, "")
+        backtrack(0, 0, "")
         return res
 
