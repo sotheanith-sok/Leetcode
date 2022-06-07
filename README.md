@@ -26,7 +26,7 @@ Leetcode
 
 
 <!-- Description -->
-A collection of leetcode solution implemeted with native python library only.
+A collection of leetcode solutions implemeted with native python library only.
 
 <!-- Include your major tools and frameworks -->
 ## Built With
