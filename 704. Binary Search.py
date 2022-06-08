@@ -26,20 +26,26 @@ Complexity:
 
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
+
+        # Left and right pointers.
         l, r = 0, len(nums) - 1
 
+        # Iterate until the two pointers cross.
         while l <= r:
 
+            # Calculate the mid pointer and floor it.
             mid = (l + r) // 2
 
+            # Check if we found the target.
             if nums[mid] == target:
                 return mid
 
+            # If the target is less than the value at the mid pointer, search left side.
             if target < nums[mid]:
                 r = mid - 1
+
+            # Else, search right side.
             else:
                 l = mid + 1
-
-            pass
 
         return -1
