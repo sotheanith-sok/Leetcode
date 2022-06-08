@@ -38,14 +38,15 @@ Complexity:
 
 """
 
+
 class Solution:
     def nextGreaterElement(self, nums1: list[int], nums2: list[int]) -> list[int]:
 
         # Create a hashmap of [val:index] to know which index we should save the answers to.
-        hashmap = {v:i for i,v in enumerate(nums1)}
+        hashmap = {v: i for i, v in enumerate(nums1)}
 
         # Result array
-        res = [-1]*len(nums1)
+        res = [-1] * len(nums1)
 
         # Monotonic Stack
         stack = []
@@ -65,7 +66,7 @@ class Solution:
                 # Save result to the result array
                 res[i] = n
 
-            # If the current value is one of the value we are trying to find the answer to, append the value to the monotonic stack. 
+            # If the current value is one of the value we are trying to find the answer to, append the value to the monotonic stack.
             if n in hashmap:
                 stack.append(n)
 
