@@ -17,7 +17,7 @@ Problem:
     Input: s = "101023"
     Output: ["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]
 
-Solution (Backtrack):
+Solution:
     We can solve this problem with backtracking. At each iteration, we extract 1 to 3 digits from the string and append a dot at the end of it. The remaining string will be its own sub problems. We know that we found a valid ip address if we used exactly 4 dots and we reach the end of the string. Else, if we use more than 4 dots or the potential digits create value bigger than 255 or it has a leading zero, we stop and backtrack.    
 
 Complexity:

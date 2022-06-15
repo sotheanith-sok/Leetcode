@@ -19,7 +19,7 @@ Problem:
     Input: nums = [3,3], target = 6
     Output: [0,1]
 
-Solution (Dynamic Programming):
+Solution:
     Use a hashmap to keep tracks of previous values and indices (val -> index). For each number in the list, calculate the difference between its value and the target value. If the difference exists in the hashmap, you found the answer.   
 
 Complexity:

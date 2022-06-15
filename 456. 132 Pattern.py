@@ -19,7 +19,7 @@ Problem:
     Output: true
     Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
 
-Solution (Monotonic Stack):
+Solution:
     To solve this problem, we will use monotonic stack because we are trying to preserve the order by which i and j appear in the array. At any given k, j should be the maximum number to the left of k and i should be the minimum number to the left of j. Thus, we will remove all previous j that are less than or equal to k from the stack. Then, we test if i < k < j with the value on top of the stack. If the condition isn't satisfy, we add the current k as j and the minimum of k and previous minimum as i into the stack.  
 
     Self observation:

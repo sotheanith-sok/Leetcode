@@ -20,7 +20,7 @@ Problem:
     1  -1   2  -1
     0  -1   3   4
 
-Solution (BFS):
+Solution:
     Find a starting node(distance == 0) and start a bfs from there. For subsequence neighborig nodes, update their distance such that it is 1 more than the previous node. Only update a distance to a given node if it is less than existing distance. Since distance started at 0 and keep increasing, the wall node (distance == -1) will never get override. If any node contain is unreachable, it will never get its value updated. 
 
 Complexity:

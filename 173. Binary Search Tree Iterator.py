@@ -30,7 +30,7 @@ Problem:
     bSTIterator.hasNext(); // return False
 
 
-Solution (Iterative DFS):
+Solution:
     We will use iterative version of DFS to solve this problem. Just like recursive dfs, we will create a stack to store unvisited nodes. The order by which we are adding nodes into the stack is based on the binary tree. This means that for any given node, we will add the node itself and its left child (if existed) onto the stack. Then we add the left child of its left child onto to the stack too. The process is repeated until there isn't anymore left child. Then, when we call the next() function, we simply pop the node on top of the stack and then add that node's right child and subsequence left child onto the stack. To check if there is a next node, we simply check if there exisits a node in the stack.    
 
 Complexity:

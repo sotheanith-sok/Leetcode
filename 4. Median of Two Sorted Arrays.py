@@ -14,7 +14,7 @@ Problem:
     Output: 2.50000
     Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 
-Solution (Binary Search):
+Solution:
     To find the median, we will perform a binary search on the small array and its mid point will be used to determine the small array left partition(including the midpoint) and the large array left partition such that the sum of their lengths will be the same as the merged array left partition. Let m and n be the midpoint of the small and large arrays respectively. If we pick the correct m, small[m] <= large[n+1] and large[n] <= small[m+1]. If small[m] > large[n+1], it means that we picked too many values from the small array and thus, the correct m will on the left partition. If large[n] > small[m+1], it means that we picked too little values from the small array and thus, the correct m will be on the right partition. Repeat the process until the correct m is found. Assume negative infinity and positive infinity for out of bound.   
 
 Complexity:

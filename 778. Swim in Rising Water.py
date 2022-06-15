@@ -21,7 +21,7 @@ Problem:
     Explanation: The final route is shown.
     We need to wait until time 16 so that (0, 0) and (4, 4) are connected.
 
-Solution (Dijkstra's Algorithm):
+Solution:
     We will perform a bfs search on the graph. To start with it, we will add the (0,0) node and its cost to the min heap (sorted by the cost). Until we reach the (n-1,n-1) node, we pop a node from the heap a. Then, for every unvisited neighbor, we pick the max between the current node cost and the neighbor node cost and add that neighbor node to the min heap and mark it as visited. Repeat the process.   
 
 Problem:

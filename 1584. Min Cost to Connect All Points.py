@@ -15,7 +15,7 @@ Problem:
     Input: points = [[3,12],[-2,5],[-4,1]]
     Output: 18
 
-Solution (Minimum Spanning Tree):
+Solution:
     We start by generating all edges and their associated cost. Then, we can apply Prim's or Kruskal's algorithm to generate a minimum spanning tree.
         1. Prim's algorithm - Start at any given node. Mark the node as visted. For any neighboring nodes that hasn't been visited, add their edges and weights to a min heap. Pop the closest edge from the heap and repeat the process until all nodes are visted.
         2. Kruskal's algorithm - sort all edges by weights. For each edges, use a dijoint-set (A node has a pointer to its parent) to keep track of connections. If two subsets are disjointed aka their parents are different, we will union those two sets by turning the smaller set into a child of the larger set.     

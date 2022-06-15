@@ -15,7 +15,7 @@ Problem:
     Input: nums = [2,2,2,2,2], target = 8
     Output: [[2,2,2,2]]
 
-Solution:
+Solution: 
     This is a solution to K-sum where k is bigger than 2. To start with, we will sort the nums and perform a recursive call. At each iteration, we pick a number and call the recursive funtion on the remaining numbers. Once we picked k-2 numbers, we will use two pointers to pick the last two numbers. The left pointer will be placed at the start and the right pointers will be placed at the end of remaining nums. If the sum of value at the two pointers are more than the remaining target, we move the right pointers by once. Else if it is less than the remaining target, we move the left pointer by 1. Else, we found a solution and save to the result. Finally, we increase the left pointer by 1 and iterate until the left cross the right pointer.  
 
     To prevent duplicate solution, we will skip a recurisve call or a left pointer when the previous num is the same as the current num. 

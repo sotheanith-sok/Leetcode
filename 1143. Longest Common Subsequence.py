@@ -25,7 +25,7 @@ Problem:
     Explanation: There is no such common subsequence, so the result is 0.
 
 
-Solution (Dynamic Programming):
+Solution:
     We will use a cache matrix of size m + 1 x n + 1 where m is the length of text1 and n is the length of text2. The base case is when text1 or text2 is empty. Thus, first row and coloumn will be zero. There are two cases to consider. When text1[m] == text2[n], we knows that the common subsequence is increasing by 1. Thus, we take a previous value diagonal to it and add one to it (it will propagate to all values to the bottom-right of it). Else, we just take the max of the value above and left of the current entry.
 
     Ex: Diagonal = "a, f" and "a, c" and text1[m] == text2[n] == "b" => we take the diagonal and add one to it.

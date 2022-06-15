@@ -23,7 +23,7 @@ Problem:
     - 2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.
     - 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.
     
-Solution (Monotonic Decreasing Stack):
+Solution:
     The idea behind the optimal solution is that for a series of decreasing numbers, if we found a solution to the first value in the series, it will also be the correct solution for all values in that series. Thus, we will use a monotonic decresing stack to solve this problem. To start with, we will iterate through all values in nums2. While the value on top of the stack is less than the current value, we have found a solution to that top value on the stack and so we pop it. Then, if the current value is one of the value we trying to find a solution for, we will add it to the stack. Repeat the process until we iterate through all values in nums2. Do note that we will use a hashmap of [value in nums1: index in nums1] to know which index should we save the the solution to. 
 
     Ex 

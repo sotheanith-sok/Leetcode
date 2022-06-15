@@ -22,7 +22,7 @@ Problem:
     numMatrix.sumRegion(1, 1, 2, 2); // return 11 (i.e sum of the green rectangle)
     numMatrix.sumRegion(1, 2, 2, 4); // return 12 (i.e sum of the blue rectangle)
 
-Solution (Prefix Sum):
+Solution:
     Instead of summing all entries everytime we need to sum up a sub-matrix, we can generate a cache containing prefix sum or the sum from the origin to that entry. For every entry, we add the entry value with the previous value at the top entry and previous value at the left entry and subtract the previous value at the diagonal entry (subract overlay). With prefix sum cache, we can quickly calculate sum of any sub-matrix by taking the value at the bottom-right entry (sum(origin->entry)) subtracting the value above the top-right entry(sum(origin->area above the sub-matrix))  and the value left of the bottom-left entry(sum(origin->area left of the sub-matrix)) and adding the value located diagonal of the top-left entry(sum(origin->area diagonal of the sub-matrix)).     
 
 Complexity:

@@ -26,7 +26,7 @@ Problem:
     exention -> exection (replace 'n' with 'c')
     exection -> execution (insert 'u')
 
-Solution (Dynamic Programming):
+Solution:
     This is a classic dynamic programming problem. We will use a 2d-cache so that we can avoid repeating our previous works. The base case for this problem is when one or more words are empty and thus, the first row will be 0,1,...m-1 where m is the length of word2 and the first column will be 0,1,...,n-1 where n is the length of word1. Let up be the previous deletion operation, left be the previous insertion operation, and diagonal be the previous replacement operation. Other entries in the cache matrix can be fill by examine cells to its left, diagonal, and top and we pick the minimum + 1. Do note that if two characters are the same, we will perform any opertion and thus, we will default to the previous replacement opertion without adding 1. 
 
 Complexity:

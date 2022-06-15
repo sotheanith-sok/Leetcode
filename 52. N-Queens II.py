@@ -13,7 +13,7 @@ Problem:
     Input: n = 1
     Output: 1
 
-Solution (Backtrack):
+Solution:
     We can solve this problem with backtracking. Since adding a queen to any row will invalidate all colums at that row, we will iterate through all rows only. At any given row, we can check all columns and if it hasn't invalidated by the previous queen, we add a queen onto it and proceed to the next row. Once, we have added n queens, we found a distinct solution. 
     
     We will use three sets to keep track of if a column, a positive diagonal, or a negative diagonal has been invalidated. The trick is that for any given (m,n) entry, any subsequence entries in its positive diagonal will have their differences be the same as the orignal entry. i.e. m-n == m+1 - n+1 == m+2 - n+2 and so on. Thus, we only need a single value in the set to represent all entries in a positive diagonal. Similar, situation applied to the negative diagonal direction but we do the sum instead of the difference. i.e. m+n == m+1 + n+1 == m+2 + n+2 and so on.   

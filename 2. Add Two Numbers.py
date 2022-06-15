@@ -17,7 +17,7 @@ Problem:
     Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
     Output: [8,9,9,9,0,0,0,1]
 
-Solution (Basic Arithmetic):
+Solution:
     Create a result listnode, a pointer that points to the end of such list, and a carry variable. Keep iterating until reaching the end of list1 and list2 and the carry is 0. At each iteration, sum the value of list1, list2, and carry. Append the ones digit to the end of the result list and save the remaining digits to the carry variable. Update all relevant pointers and return the result listnode at the end of the loop.  
 
 Complexity:

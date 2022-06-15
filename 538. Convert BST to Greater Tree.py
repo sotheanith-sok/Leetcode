@@ -16,7 +16,7 @@ Problem:
     Input: root = [0,null,1]
     Output: [1,null,1]
 
-Solution (Depth First Search):
+Solution:
     Performe a depth first search on the tree and for every given node, sum up the right subtree, update the root, and sum up the left subtree. Then, return the total from the left subtree. 
 
 Complexity:

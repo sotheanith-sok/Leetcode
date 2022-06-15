@@ -23,7 +23,7 @@ Problem:
     Input: s = "pbbcggttciiippooaais", k = 2
     Output: "ps"
 
-Solution (Stack):
+Solution:
     A bruteforce approach would be to rescan the string for k duplicate after every removal. But we can do better. If we scan every character in the string one at a time, we only have to check for k duplicate pattern at the end of the generated partial string. For example, given a string "aabbcc" and k = 3, the k duplicate pattern is only possible if a "c" is the next character and thus, we don't have to worry about other characters. We can use a stack to store the previous char and its count. If its count is above k, we pop it from the stack and whatever left on top of the stack will be the new end character.  
 
 Complexity:

@@ -20,7 +20,7 @@ Problem:
     Input: nums = [1,4,4], m = 3
     Output: 4
 
-Solution (Binary Search):
+Solution:
     This is a binary search problem (Can you believe it?). Our boundary for the largest sum of a subarray is between max(nums) and sum(nums). Thus, we will use that as our left and right pointers and calculate the mid point. Then, we ask "Can we form m subarrays where the largest sum of those subarrays is the mid point?" If yes, we save it and search the left side (We try to minimize the largest sum. Thus, if a value is a valid largest sum, any larger value is also valid). Else, we search the right side. 
 
     To check if we can split the array into m subarrays with the largest sum being the target, we can sum up each value in the array and see how many array do we need to use such that each subarray is less than the target value. If we use less than or equal to m subarray, return True. Else, return False.   

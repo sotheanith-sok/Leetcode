@@ -14,7 +14,7 @@ Problem:
     Output: -1
     Explanation: 2 does not exist in nums so return -1
 
-Solution (Binary Search):
+Solution:
     Do a simple binary search. Use two pointers and check if the value at the mid pointer is equal to the target. If it is, return the mid pointer. Else, if it is less than the target, search the right side. Otherwise, search the left side. Repeat until the left pointer is more than the right pointer. 
     If you can't find the target, return -1. 
 
