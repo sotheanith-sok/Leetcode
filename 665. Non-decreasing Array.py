@@ -15,7 +15,7 @@ Problem:
     Explanation: You can't get a non-decreasing array by modify at most one element.
 
 Solution:
-    To maintain a non-decreasing order, we will check each pair of values in nums and make sure that value 1 is less than or equal to value 2. Thus, if value 2 less than value 1, we will want to update value 1 to be value 2. However, there is a edge case that we have to consider. If there exists a value before value 1 that is larger than value 2, we have to set value 2 to value 1 instead in order to maintain a non-decreasing order. Repeat the process until we have iterate through nums and return True. Or return False we have to make if we can't maintain a non-decreasing order after an edit.  
+    To maintain a non-decreasing order, we will check each pair of values in nums and make sure that value 1 is less than or equal to value 2. Thus, in general, we will set both values to the minimum of the two and noted that we have perform an edit. However, there is a edge case that we have to consider. If there exists a value before value 1 that is larger than the minimum of the two values, we have to set both values to the maximum of the two values instead in order to maintain a non-decreasing order. Repeat the process until we have iterate through nums and return True. Or return False we have to make if we can't maintain a non-decreasing order after an edit.  
 
 Complexity:
     Time: O(n)
@@ -32,20 +32,18 @@ class Solution:
         # Iterate through nums
         for i in range(len(nums) - 1):
 
-            # If value 1 is larger than value 2
+            # If value1 is larger than value 2
             if nums[i] > nums[i + 1]:
 
-                # If we have edited before, return False
+                # And we have edited before, return False
                 if edit:
                     return False
 
-                # If value 2 is also larger than or equal to the value before value 1, update value 1 to the value at value 2. ie [2,7,3] -> [2,3,3]
-                if i == 0 or nums[i + 1] >= nums[i - 1]:
-                    nums[i] = nums[i + 1]
+                # Calculate the min value and the max value  of the two values
+                maxV, minV = max(nums[i], nums[i + 1]), min(nums[i], nums[i + 1])
 
-                # Else, update value 2 to value 1. ie [2,7,1] -> [2,7,7]
-                else:
-                    nums[i + 1] = nums[i]
+                # Set both values to the min value unless there exists a value before value that is larger than the min value
+                nums[i] = nums[i + 1] = maxV if i > 0 and nums[i - 1] > minV else minV
 
                 # Update the edit
                 edit = True
