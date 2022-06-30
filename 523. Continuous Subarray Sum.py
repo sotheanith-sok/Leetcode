@@ -56,4 +56,3 @@ class Solution:
         # Return false if we didn't find a solution.
         return False
 
-print(Solution().checkSubarraySum([5,7,1,2],7))

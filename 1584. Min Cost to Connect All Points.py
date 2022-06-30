@@ -126,6 +126,3 @@ class Solution:
 
         return cost
 
-
-print(Solution().minCostConnectPoints([[3,12],[-2,5],[-4,1]]))
-
