@@ -54,7 +54,6 @@ class Solution:
             if seats[r] == 1 or r == n - 1:
 
                 # If at least one seat is empty, we know that we are working with the edge case and thus, the max distance is the different between the two pointers
-
                 if seats[l] == 0 or seats[r] == 0:
                     res = max(res, r - l)
 
