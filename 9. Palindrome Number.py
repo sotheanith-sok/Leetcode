@@ -21,6 +21,8 @@ Problem:
     Output: false
     Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 
+    Follow up: Could you solve it without converting the integer to a string?
+
 Solution:
     If x is positive, start by finding how many digits to represent such number. Then, continue to divide x by 10 and multiply the remainder with 10**n where n is the place of significant. Accumulate the result and decrement n. Repeat until x is zero. Lastly, return True if x is equal to reversed x. Else, false.
     If x is negative, return false because it is impossible for a negative number to be a palindrome.
