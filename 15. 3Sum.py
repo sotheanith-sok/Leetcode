@@ -46,7 +46,7 @@ class Solution:
         nums = sorted(nums)
 
         # k-sum backtracking
-        def backtrack(k=3, start=0, target=0, partialRes=[]):
+        def kSum(k=3, start=0, target=0, partialRes=[]):
             nonlocal res
 
             # While k hasn't reach 2
@@ -60,7 +60,7 @@ class Solution:
                         continue
 
                     # Pick a number recursively
-                    backtrack(k - 1, i + 1, target - nums[i], partialRes + [nums[i]])
+                    kSum(k - 1, i + 1, target - nums[i], partialRes + [nums[i]])
 
                 return
 
@@ -93,7 +93,7 @@ class Solution:
                     while l < r and nums[l] == nums[l - 1]:
                         l += 1
 
-        backtrack()
+        kSum()
 
         return res
 

@@ -21,8 +21,8 @@ Solution:
     To prevent duplicate solution, we will skip a recurisve call or a left pointer when the previous num is the same as the current num. 
 
 Complexity:
-    Time: O(n**k-1)
-    Space: O(n)
+    Time: O(n**k)
+    Space: O(n**k)
 """
 
 
@@ -39,7 +39,7 @@ class Solution:
         res = []
 
         # The recursive calls
-        def k_sum(k=4, start=0, target=target, quad=[]):
+        def kSum(k=4, start=0, target=target, quad=[]):
 
             # Pick k-2 numbers
             if k != 2:
@@ -52,7 +52,7 @@ class Solution:
                         continue
 
                     # Do the recurisve call on the remaining nums
-                    k_sum(k - 1, i + 1, target - nums[i], quad + [nums[i]])
+                    kSum(k - 1, i + 1, target - nums[i], quad + [nums[i]])
 
                 # Return here to prevent the next of the algorithm from running if we havn't pick k-2 numbers
                 return
@@ -83,6 +83,6 @@ class Solution:
                     while l < r and nums[l] == nums[l - 1]:
                         l += 1
 
-        k_sum()
+        kSum()
         return res
 
