@@ -29,20 +29,19 @@ Complexity:
     Space: O(n)
 """
 
-
 from functools import lru_cache
 
 
 class Solution:
     def combinationSum4(self, nums: list[int], target: int) -> int:
 
-        # Recursively picking numbers from nums that reduce target to 0 but not lesser than 0
+        # Recursively picking numbers from nums that reduce the target to 0 but not lesser than 0
         # Use lru_cache to avoid repeated work
         @lru_cache(None)
-        def dp(taget):
+        def dp(remain):
 
-            # If target is 0, we have found a combination
-            if taget == 0:
+            # If the remain is 0, we have found a combination
+            if remain == 0:
                 return 1
 
             # Initialize the partial result to 0
@@ -51,12 +50,12 @@ class Solution:
             # Pick numbers from nums
             for num in nums:
 
-                # Skip any numbers that reduce target to a negative number
-                if taget - num < 0:
+                # Skip any number that reduce the remain to a negative number
+                if remain - num < 0:
                     continue
 
-                # Add the numbers of combinations added to the remain of target subtracting picked number into the partial result
-                partialRes += dp(taget - num)
+                # Accumulate the number of combinations return from the remain (aka the target - a picked number) into the partial result
+                partialRes += dp(remain - num)
 
             # Return the partial result
             return partialRes
