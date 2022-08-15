@@ -173,7 +173,7 @@ class Solution:
                 # Add such path to the result
                 res.append(list(path))
 
-                return
+                return res
 
             # Else, get the first word in a path
             word = path[0]
