@@ -44,6 +44,7 @@ Complexity:
 """
 
 
+# Top-down
 from functools import lru_cache
 
 
@@ -94,3 +95,42 @@ class Solution:
 
         return backtrack(0, 0)
 
+
+# Bottom-up
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+
+        # Get lengths of s and p
+        m, n = len(s), len(p)
+
+        # Initialize the cache
+        cache = [[False for _ in range(n + 1)] for _ in range(m + 1)]
+
+        # 0th index will represent an empty string
+        # Thus, empty string s can be match with empty string p
+        cache[0][0] = True
+
+        # Update the first row or when s is empty
+        # A character in the pattern can only be match with an empty s if it is a "*" and the previous character is also matchable with an empty s
+        for j in range(n):
+            cache[0][j + 1] = p[j] == "*" and cache[0][j]
+
+        # Iterate through all combinations
+        for i in range(m):
+            for j in range(n):
+
+                # If characters at i and j can be pair, check there is a route leading up to the current character
+                if s[i] == p[j] or p[j] == "?":
+                    cache[i + 1][j + 1] = True and cache[i][j]
+
+                # If the current character at j is a "*",
+                # Check if there is a round that lead up to the current character
+                # (i, j-1) : match "*" to an empty string
+                # (i-1, j) : match "*" to more than one character
+                # (i-1, j-1) : match "*" to a single character
+                if p[j] == "*":
+                    cache[i + 1][j + 1] = (
+                        cache[i + 1][j] or cache[i][j + 1] or cache[i][j]
+                    )
+
+        return cache[m][n]
