@@ -80,7 +80,7 @@ class Solution:
                     # Calculate the different between the column prefix sum and k
                     diff = colSum - k
 
-                    # Perform a binary search to find an index of a value is larger but cloest to the target among previously calculated column prefix sums
+                    # Perform a binary search to find an index of a value is larger but cloest to the different among previously calculated column prefix sums
                     idx = bisect_right(colSums, diff)
 
                     # Check if the different exists among the previously calculated column prefix sums
@@ -92,7 +92,7 @@ class Solution:
                         # End the search because we found the largest possible result
                         return k
 
-                    # Else, if the different does not exist among the previously calculated column prefix sums, check if there is a previously calculated column prefix sum larger than the target
+                    # Else, if the different does not exist among the previously calculated column prefix sums, check if there is a previously calculated column prefix sum larger than the different
                     elif idx != len(colSums):
 
                         # If yes, update the result with the new area if it is larger than previous result
