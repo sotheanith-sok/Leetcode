@@ -28,7 +28,7 @@ Solution:
 
 Complexity:
     Time: O(n)
-    Space: O(1)
+    Space: O(n)
 """
 
 from math import inf

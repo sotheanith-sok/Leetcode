@@ -23,7 +23,7 @@ Solution:
 
 Complexity:
     Time: O(logn)
-    Space: O(1)
+    Space: O(n)
 """
 
 # Definition for a binary tree node.
