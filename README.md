@@ -15,6 +15,7 @@ Leetcode
 <!-- Shield IO - very nice icons -->
 <div align="center">
 
+[![Commit][commit_shield]][commit_url]
 [![Contributors][contributors_shield]][contributors_url]
 [![Forks][forks_shield]][forks_url]
 [![Stargazers][stars_shield]][stars_url]
@@ -52,6 +53,7 @@ Special thank to
 
 <!-- References -->
 <!-- Shield Icons-->
+[commit_shield]: https://img.shields.io/github/last-commit/sotheanithsok/Leetcode.svg?style=for-the-badge
 [contributors_shield]: https://img.shields.io/github/contributors/sotheanithsok/Leetcode.svg?style=for-the-badge
 [forks_shield]: https://img.shields.io/github/forks/sotheanithsok/Leetcode.svg?style=for-the-badge
 [stars_shield]: https://img.shields.io/github/stars/sotheanithsok/Leetcode.svg?style=for-the-badge
@@ -60,6 +62,7 @@ Special thank to
 [linkedin_shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 
 <!-- Shield URLs -->
+[commit_url]: https://github.com/sotheanithsok/Leetcode/commits/main
 [contributors_url]: https://github.com/sotheanithsok/Leetcode/graphs/contributors
 [forks_url]: https://github.com/sotheanithsok/Leetcode/network/members
 [stars_url]: https://github.com/sotheanithsok/Leetcode/stargazers
