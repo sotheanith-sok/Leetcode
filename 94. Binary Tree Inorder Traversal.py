@@ -25,6 +25,7 @@ Complexity:
 
 """
 
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -35,59 +36,29 @@ class TreeNode:
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> list[int]:
 
-        # Base case
+        # If there is no root node given, return empty list
         if not root:
             return []
 
-        # Intialize the stack, res, and visit
-        stack, res, visit = [], [], set()
-
-        # Iterative DFS
-        # Add the root to the stack
-        stack.append(root)
+        # Initialize the stack, visited set, and a result list
+        stack, visited, res = [root], set([root]), []
 
         # Iterate until the stack is empty
         while stack:
 
-            # Add all subsequence left children to the stack. 
-            while stack[-1].left and stack[-1].left not in visit:
+            # If the current node at the top of the stack has a left child and we haven't visited such child yet, add it to the stack
+            while stack[-1].left and stack[-1].left not in visited:
+                visited.add(stack[-1].left)
                 stack.append(stack[-1].left)
 
-            # Pop the node for the stack, mark it as visited, and save its value in the result list.
+            # Pop a node and add its value to the result
             node = stack.pop()
-            visit.add(node)
             res.append(node.val)
 
-            # If such node has a right child, add it to the stack.
-            if node.right and node.right not in visit:
+            # If the current node has a right child and we haven't visit such child yet, add such child to the stack
+            if node.right and node.right not in visited:
+                visited.add(node.right)
                 stack.append(node.right)
 
         return res
 
-
-class Solution:
-    def inorderTraversal(self, root: TreeNode) -> list[int]:
-        # Base case
-        if not root:
-            return []
-
-        # Initialize res and visit
-        res, visit = [], set()
-
-        # Recurisve dfs
-        def dfs(node):
-
-            # Process all of the left children nodes first
-            while node.left and node.left not in visit:
-                dfs(node.left)
-
-            # Mark a node as visited and save its value.
-            visit.add(node)
-            res.append(node.val)
-
-            # If the node has a right child, process that one. 
-            if node.right and node.right not in visit:
-                dfs(node.right)
-
-        dfs(root)
-        return res
