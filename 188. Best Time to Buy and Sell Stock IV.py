@@ -92,8 +92,6 @@ class Solution:
         # Find the largest maximum price among all possible i and k
         return max(dp(i, k) for i, k in product(range(m), range(n + 1)))
 
-from itertools import product
-from math import inf
 
 # Bottom-up dp
 class Solution:
@@ -123,6 +121,4 @@ class Solution:
 
         # Return the largest maximum profit lower bound at 0
         return max(0, max(cache.values()))
-
-
 
