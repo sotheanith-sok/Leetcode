@@ -26,12 +26,12 @@ Problem:
 Solution:
     A number is a part of the orignal array if there exists another number that double such number. Thus, we should try to pair a smallest number first since it can only be the original number; not the double of another number. 
 
-    Start by sorting all numbers and counts their occurrences. Iterate through all numbers. If the current number hasn't been pair with another number, check if there exists another number that double such number and we haven't use both numbers yet. If yes, add the orignal number to the result and decrement counts of both numbers. Lastly, remove any number with its count of 0 from the counter. Return the result if we paired all numbers. Else, return empty list. 
+    Start by counting all numbers and their occurrences. Iterate through all sorted unique numbers. If the current number hasn't been pair with another number, check if there exists another number that double such number and we haven't use both numbers yet. If yes, add the orignal number to the result and decrement counts of both numbers. Lastly, remove any number with its count of 0 from the counter. Return the result if we paired all numbers. Else, return empty list. 
 
     Do note that if the current number is 0, we should check that there exists at least 2 occurrences of such number before adding it to the result
 
 Complexity:
-    Time: O(nlogn)
+    Time: O(nlogn) where n is the number of unique changed
     Space: O(n)
 """
 
@@ -40,10 +40,6 @@ from collections import Counter
 
 class Solution:
     def findOriginalArray(self, changed: list[int]) -> list[int]:
-
-        # Sort all numbers because a smallest number can only be the orginal number and thus, we should pair it with its double asap
-        changed.sort()
-
         # Count all numbers
         counts = Counter(changed)
 
@@ -51,18 +47,24 @@ class Solution:
         res = []
 
         # Iterate through all numbers
-        for num in changed:
+        for num in sorted(counts):
 
             # If the current number hasn't been paired yet and there is another unpair number that double it, pair both numbers
             if num in counts and (
                 (num == 0 and counts[num] >= 2) or (num != 0 and num * 2 in counts)
             ):
-                # Add the current number to the result
-                res.append(num)
+
+                # Calculate how many occurence of both numbers can be paired together
+                occurence = (
+                    min(counts[num], counts[num * 2]) if num != 0 else counts[num] // 2
+                )
+
+                # Add number to the result
+                res += [num] * occurence
 
                 # Decrement counts of both numbers
-                counts[num] -= 1
-                counts[num * 2] -= 1
+                counts[num] -= occurence
+                counts[num * 2] -= occurence
 
                 # Remove the current number from the counter if its count is 0
                 if num in counts and counts[num] == 0:
@@ -75,4 +77,3 @@ class Solution:
         # Return result if we paired all numbers
         # Else, return empty list
         return res if not counts else []
-
