@@ -41,7 +41,7 @@ from collections import defaultdict
 class TrieNode:
     def __init__(self, words=None):
 
-        # A list of words used for a quick look up since trie node will work mostly with indices.
+        # A list of words used for a quick look up since the trie node will work mostly with indices.
         self.words = words
 
         # Dictionary mapped this node to its child nodes
@@ -132,10 +132,10 @@ class TrieNode:
         return res
 
     # Check if two words are a palindrome given we made kth comparison already
-    def isPalindrome(self, k, word1, word2):
+    def isPalindrome(self, k, i, j):
 
         # Find lengths of both words
-        m, n = len(self.words[word1]), len(self.words[word2])
+        m, n = len(self.words[i]), len(self.words[j])
 
         # Intialize the left and right pointers
         l, r = k, m + n - 1 - k
@@ -145,8 +145,8 @@ class TrieNode:
 
             # Find characters at both pointers
             c1, c2 = (
-                self.words[word1][l] if 0 <= l < m else self.words[word2][l - m],
-                self.words[word1][r] if 0 <= r < m else self.words[word2][r - m],
+                self.words[i][l] if 0 <= l < m else self.words[j][l - m],
+                self.words[i][r] if 0 <= r < m else self.words[j][r - m],
             )
 
             # If both characters are different, return False
