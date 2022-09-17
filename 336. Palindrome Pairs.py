@@ -31,7 +31,7 @@ Solution:
     3. Use list instead of set for the trie node (Set is about 80% slower than list for looping and it will cause TLE) 
 
 Complexity:
-    Time: O(mn) where is m is the number of words and n is the length of the longest word
+    Time: O(mn**2) where is m is the number of words and n is the length of the longest word
     Space: O(mn)
 """
 
