@@ -34,115 +34,89 @@ Problem:
     myCircularQueue.Rear();     // return 4
 
 Solution:
-    You can use either a list or a linked nodes for solving this problem. The general idea is that you have two pointers where one is pointing to the start of the queue and another one is pointing to the end of the queue. If you use a list, None can be used to indicate empty spots and the max size is enforced by the size of the list. If you use a linked nodes, you have to keep track of the current count and the max size. enQueue will increment the start pointer and deQueue will decrement the end pointer.   
+    Use a list of size k to store all numbers. Use two pointers: front and rear that point to the first and last numbers of the queue and two variables to maintain the current and max size of the queue. 
+
+    1. enQueue
+        If the current size is equal to the max size, return False. Else, increment the rear pointer and current size by 1. Then, save the number at the rear pointer. Last but not least, move the front pointer to the rear pointer if this is the first number in the queue. 
+        
+    2. deQueue
+        If the current size is 0, return False, Else, increment the front pointer and decrement the current size by 1.
+
+    3. Front
+        Return the number at the front pointer
+
+    4. Rear
+        Return the number at the rear pointer
+
+    5. isEmpty
+        Check if the current size is 0
+
+    6. isFull
+        Check if the current size is equal to max size
 
 Complexity:
     Time: O(1)
-    Space: O(n)
+    Space: O(k)
 
 """
 
-# List Solution
-class MyCircularQueue:
-    def __init__(self, k: int):
-        # Initialize varaibles and a list of none
-        self.max, self.list, self.start, self.end = k, [None] * k, 0, 0
-
-    def enQueue(self, value: int) -> bool:
-
-        # If the end pointer is pointing to an empty slot, add the value there and move the end pointer to the next slot.
-        if self.list[self.end] == None:
-            self.list[self.end] = value
-            self.end = (self.end + 1) % self.max
-            return True
-        return False
-
-    def deQueue(self) -> bool:
-
-        # If the start pointer is pointer to a non empty slot, set it to empty and move the start pointer to the next slot. 
-        if self.list[self.start] != None:
-            self.list[self.start] = None
-            self.start = (self.start + 1) % self.max
-            return True
-        return False
-
-    def Front(self) -> int:
-        # If there is a value at the start pointer, return it
-        return self.list[self.start] if self.list[self.start] != None else -1
-
-    def Rear(self) -> int:
-        # If there is a value at the end pointer, return it
-        return self.list[self.end - 1] if self.list[self.end - 1] != None else -1
-
-    def isEmpty(self) -> bool:
-        # If the start and the end pointers are pointing to empty slots, the list is empty
-        return self.list[self.start] == self.list[self.end] == None
-
-    def isFull(self) -> bool:
-        # If the start and the end pointers are pointing to non empty slots, the list is full
-        return self.list[self.start] != None and self.list[self.end] != None
-
-
-class Node:
-    def __init__(self, val, next=None) -> None:
-        self.val = val
-        self.next = next
-
 
 class MyCircularQueue:
     def __init__(self, k: int):
 
-        self.count, self.max, self.start, self.end = 0,k, None, None
+        # Initialize the list of size k to store all numbers in the queue
+        self.list = [0] * k
+
+        # Initialize two variables to keep track of the current and max size of the queue
+        self.size, self.max = 0, k
+
+        # Initialize two pointers to keep track of numbers at the front and rear of the queue
+        self.front, self.rear = -1, -1
 
     def enQueue(self, value: int) -> bool:
-        # If the count hasn't reach the max
-        if self.count < self.max:
 
-            # If the queue is empty, set the start and the end pointers to a new node. 
-            if self.count == 0:
-                self.end = Node(value)
-                self.start = self.end
+        # If the queue is full, return False
+        if self.size == self.max:
+            return False
 
-            # Else, add a new node to the end of the link nodes. 
-            else:
-                self.end.next = Node(value)
-                self.end = self.end.next
+        # Increment the rear pointer and the current size by 1
+        self.rear, self.size = (self.rear + 1) % self.max, self.size + 1
 
-            # Increment the count
-            self.count += 1
-            return True
-        return False
+        # Save the number at the rear pointer
+        self.list[self.rear] = value
+
+        # If this is the first number in the queue, move the front pointer to the rear pointer
+        if self.size == 1:
+            self.front = self.rear
+        return True
 
     def deQueue(self) -> bool:
 
-        # If there is at least one node in the linked nodes,
-        if self.count > 0:
+        # If the queue is empty, return False
+        if self.size == 0:
+            return False
 
-            # Set the start pointer to the next node
-            self.start = self.start.next
+        # Increment the front pointer and decrement the current size by 1
+        self.front, self.size = (self.front + 1) % self.max, self.size - 1
 
-            # Decrement the count
-            self.count -= 1
-
-            # If the count reach 0, set the end pointer to None. 
-            self.end = None if self.count == 0 else self.end
-            return True
-
-        return False
+        return True
 
     def Front(self) -> int:
-        # If there is a node at the start pointer, return its value.
-        return self.start.val if self.start else -1
+
+        # Return the number at the front pointer if the queue isn't empty, Else, return -1
+        return self.list[self.front] if self.size != 0 else -1
 
     def Rear(self) -> int:
-        # If there is a  node at the end pointer, return its value.
-        return self.end.val if self.end else -1
+
+        # Return the number at the rear pointer if the queue isn't empty. Else, return -1
+        return self.list[self.rear] if self.size != 0 else -1
 
     def isEmpty(self) -> bool:
-        # Queue is empty when the count is 0
-        return self.count == 0
+
+        # Return true if the current size is 0
+        return self.size == 0
 
     def isFull(self) -> bool:
-        # Queue is full when the count reaches max. 
-        return self.count == self.max
 
+        # Return true if the current size is equal to the max size
+        return self.size == self.max
