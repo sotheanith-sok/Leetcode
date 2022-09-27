@@ -25,7 +25,7 @@ Problem:
     Output: "LL.RR.LLRRLL.."
 
 Solution:
-    We will simulate every dominoe using a queue. To start with, we will add all pushed dominoes into a queue (index, val). Then, while a queue is not empty, we pop a domino and check if it pushed left or right. If it is pushed left, we will check if the previous domino can be pushed. If yes, we push it and add that domino to the queue. If it is pushed right, we will check if the first next domino can be pushed. If yes, we also check if the second next domino is being pushed left. If yes, we won't push the first next domino and pop a domino from a queue(the second next domino should be the one on top). Else, we will push the first next domino and add it the queue. 
+    We will BFS through all dominoes starting unpushed dominoes with a left pushed dominoe to its right and unpushed dominoes with right pushed dominoe to its left. While queue isn't empty, process all dominoes that will be pushed in this round. A dominoe can't be pushed if its left dominoe is a right pushed dominoe and its right dominoe is a left pushed dominoe. Else, we push such dominoe and add the next unpushed dominoe onto the queue. To avoiding a situation where one dominoe can't be pushed because its neighboring dominoe being pushed at the same round, we will update all dominoe orientation at the end of each round. 
 
 Complexity:
     Time: O(n)
@@ -33,49 +33,83 @@ Complexity:
 
 """
 
-
 from collections import deque
 
 
 class Solution:
     def pushDominoes(self, dominoes: str) -> str:
 
-        # Get the number of dominoes
-        N = len(dominoes)
-
-        # Convert str to list for easier editing
+        # Convert dominoes to a list for faster updating
         dominoes = list(dominoes)
 
-        # Use doublely link list for O(1) pop from the start and the end.
+        # Find the number of dominoes
+        n = len(dominoes)
+
+        # A helper function to find the next dominoe
+        directions = {"L": -1, "R": 1}
+
+        # Intialize the queue storing dominoes that can be pushed
         queue = deque()
 
-        # Find all dominoes that being pushed and add them to the queue.
-        for i, v in enumerate(dominoes):
-            if v != ".":
-                queue.append((i, v))
+        # Initialize a list storing dominoes to be updated at the end of the round
+        update = []
 
-        # While queue isn't empty.
+        # Add all dominoes that can be pushed in the first round into the queue
+        for i in range(n):
+
+            # If the current dominoe already pushed, skip it
+            if dominoes[i] != ".":
+                continue
+
+            # If there is a left pushed dominoe to the right of the current dominoe, add the current dominoe into the queue
+            if i + 1 < n and dominoes[i + 1] == "L":
+                queue.append(i)
+
+            # If there is a right pushed dominoe to the left of the current dominoe, add the current dominoe into the queue
+            if i - 1 >= 0 and dominoes[i - 1] == "R":
+                queue.append(i)
+
+        # While there is a dominoe to be push
         while queue:
 
-            # Pop a domino
-            i, v = queue.popleft()
+            # Find how many dominoe will be pushed in this round
+            k = len(queue)
 
-            # If pushed left, check if the previous dominio can be pushed. If yes, push it and add the previous domino into the queue.
-            if v == "L" and i - 1 >= 0 and dominoes[i - 1] == ".":
-                dominoes[i - 1] = "L"
-                queue.append((i - 1, dominoes[i - 1]))
+            # Process all dominoe
+            for _ in range(k):
 
-            # If pushed right, check if the first next domino can be pushed. 
-            if v == "R" and i + 1 < N and dominoes[i + 1] == ".":
+                # Pop a domino
+                i = queue.popleft()
 
-                # If yes, check if the second next domino is being pushed left.
-                if i + 2 < N and dominoes[i + 2] == "L":
-                    # If yes, don't push the domino and pop a domino from the queue (It should be the second next domino).
-                    queue.popleft()
+                # If a domino can't be pushed because there is a left pushed dominoe to its right and a right pushed dominoe to its left, skip it
+                if (
+                    i - 1 >= 0
+                    and dominoes[i - 1] == "R"
+                    and i + 1 < n
+                    and dominoes[i + 1] == "L"
+                ):
+                    continue
 
-                # Else, push the next domino and add it to the queue
-                else:
-                    dominoes[i + 1] = "R"
-                    queue.append((i + 1, dominoes[i + 1]))
+                # Else, we can push the current dominoe. Save the dominoe and its new orientation into a list to be updated later
+                update.append(
+                    (i, "R" if i - 1 >= 0 and dominoes[i - 1] == "R" else "L")
+                )
+
+                # Find the next dominoe
+                nextI = i + directions[update[-1][1]]
+
+                # If the next dominoe hasn't been pushed, add it into the queue
+                if 0 <= nextI < n and dominoes[nextI] == ".":
+                    queue.append(nextI)
+
+            # While there is a dominoe to be updated for this round
+            while update:
+
+                # Pop a dominoe from the list
+                i, val = update.pop()
+
+                # Update its orientation
+                dominoes[i] = val
 
         return "".join(dominoes)
+
