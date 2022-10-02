@@ -67,10 +67,10 @@ class Solution:
             # Calculate pathSum of the current node's left and right subtrees
             leftSum, rightSum = pathSum(node.left), pathSum(node.right)
 
-            # Calculate the pathSum that current node and one of its subtree will contribute to the maxPathSum calculation of its parent
+            # Calculate the pathSum that current node and one of its subtree(one) will contribute to the maxPathSum calculation of its parent
             pSum = max(node.val, node.val + leftSum, node.val + rightSum)
 
-            # Calculate the maxPathSum where the tree composed of the current node and its subtrees only
+            # Calculate the maxPathSum where the tree composed of the current node and its subtrees(both) only
             maxPSum = max(
                 node.val,
                 node.val + leftSum,
