@@ -23,13 +23,13 @@ Problem:
     Explanation: Since the tree is empty, there are no root-to-leaf paths.
 
 Solution:
-    Use dfs to solve this problem. At every iteration, we add the node's value to the total and we check if this node is a leaf node and the current total is equal to the targetSum. If yes, we have found a solution and return True. Else, we call a dfs on its children and return True if its children dfs return True. If not, this isn't a right path and thus, we subtract the node's value from the total and return False.  
+    Use dfs to traverse the graph. Add values of all nodes in a path together. When, we reach a leaf node, check if the current sum is equal to the target sum. If yes, return True. Else, backtrack and search other paths.  
 Complexity:
-    Time: O(n**2)
+    Time: O(n)
     Space: O(n)
 """
 
-# Definition for a binary tree node.
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -40,39 +40,27 @@ class TreeNode:
 class Solution:
     def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:
 
-        # If we didn't give any tree, return False
-        if not root:
-            return False
+        # DFS to sum up all node values along a path
+        def dfs(node, previousSum):
 
-        # Accumulator
-        total = 0
+            # If there isn't a node, return False
+            if not node:
+                return False
 
-        # Perform DFS
-        def dfs(node):
+            # Calculate the current sum
+            currentSum = node.val + previousSum
 
-            # Add the value of a node to the total
-            nonlocal total
-            total = total + node.val
+            # If we reach a leaf node, check if the current sum equal to the target sum
+            if not node.left and not node.right:
+                return True if targetSum == currentSum else False
 
-            # If we reach a leaf node and the total is equal to targetSum, return True
-            if not node.left and not node.right and total == targetSum:
+            # Check all paths to see if there is a current sum equal to the target sum. If yes, return True  and end the search
+            if (node.left and dfs(node.left, currentSum)) or (
+                node.right and dfs(node.right, currentSum)
+            ):
                 return True
 
-            # Else, visit its left child if it has one.
-            if node and node.left:
-                if dfs(node.left):
-                    return True
-
-            # Else, visit its right child if it has one.
-            if node and node.right:
-                if dfs(node.right):
-                    return True
-
-            # If we haven't found the solution by this point, this isn't a correct path and thus, we reverse the add.
-            total = total - node.val
-
-            # Return false and backtrack.
+            # Return False if we can't find one
             return False
 
-        return dfs(root)
-
+        return dfs(root, 0)
