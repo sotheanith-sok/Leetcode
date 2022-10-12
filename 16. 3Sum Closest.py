@@ -16,17 +16,15 @@ Problem:
     Output: 0
 
 Solution:
-    This solution is a modification of kth sum solution.
-
-    Start by sorting nums. Then, recursively pick a number until you picked k-2 numbers and only if the result isn't equal to the target yet. To avoid duplication, you can only pick from subsequent numbers after the previously picked number. 
-
-    We will use the two pointers technique to picks the last two numbers. Initialize the left pointers to the index of the last picked number adding 1 and the right pointers to the end of nums. 
-    If the sum of all values including at both pointers are less than the target, increment the left pointer by 1. Else, if the sum of all values including at both pointers are greater than the taget, decrement the right pointer by 1. Else, we have found the cloest sum to the target and thus, we return. 
+    Reduce this problem to two sum.
+    
+    Use three pointers to solve this problem. Start by sorting nums and iterate through nums. At each iteration, use other two pointers to find two numbers such that the sum of numbers at all three pointers sum up as cloest to target. Return the closest sum.  
 
 Complexity:
-    Time: O(n**k)
+    Time: O(n**2)
     Space: O(1)
 """
+
 
 from math import inf
 
@@ -34,60 +32,41 @@ from math import inf
 class Solution:
     def threeSumClosest(self, nums: list[int], target: int) -> int:
 
+        # Find the length of numbers
+        n = len(nums)
+
+        # Sort nums
+        nums.sort()
+
         # Initialize the result
-        res = inf
+        res = -inf
 
-        # Sort nums so it is easier to avoid duplication
-        nums = sorted(nums)
+        # Iterate through all numbers
+        for bound in range(n - 2):
 
-        # k-sum backtracking
-        def kSumClosest(k=3, start=0, partialTotal=0):
-            nonlocal res
-
-            # While k hasn't reach 2
-            if k != 2:
-
-                # Pick a number from nums starting from the index of the previously picked number plus 1
-                for i in range(start, len(nums)):
-
-                    # If result is equal to target, we can stop the search
-                    if res == target:
-                        return
-
-                    # To avoid duplication, we skip any number that is the same as the previous number
-                    if i > start and nums[i] == nums[i - 1]:
-                        continue
-
-                    # Pick a number recursively
-                    kSumClosest(k - 1, i + 1, partialTotal + nums[i])
-
-                return
-
-            # Once we have picked k - 2 numbers
             # Initialize the left and right pointers
-            l, r = start, len(nums) - 1
+            l, r = bound + 1, n - 1
 
-            # Iterate until both pointers crossed
+            # While left and right pointers haven't cross each other
             while l < r:
 
-                # Add all values including at both pointers together
-                total = partialTotal + nums[l] + nums[r]
+                # Calculate the current sum
+                cSum = nums[bound] + nums[l] + nums[r]
 
-                # The current sum is closer to the target than the previous sum, save it
-                res = total if abs(target - total) < abs(target - res) else res
+                # If the current sum is closer to the target than the previous sum, save it into the result
+                if abs(res - target) > abs(cSum - target):
+                    res = cSum
 
-                # If the current sum is greater than the target, decrement the right pointer
-                if total > target:
-                    r -= 1
+                # End the search if current sum is equal to the target
+                if cSum == target:
+                    return res
 
-                # If the current sum is lesser than the target, increment the left pointer
-                elif total < target:
+                # Elif the current sum is less than the target, increment the left pointer
+                elif cSum < target:
                     l += 1
 
-                # Else, we have the cloest possible sum
+                # Else, decrement the right pointer
                 else:
-                    return
-
-        kSumClosest()
+                    r -= 1
 
         return res
