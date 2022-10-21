@@ -52,6 +52,7 @@ class Solution:
             )
 
         # Check if a given submatrix has at least 1 apple
+        @lru_cache(None)
         def isValid(minRow, maxRow, minCol, maxCol):
             return (
                 prefix[(maxRow, maxCol)]
