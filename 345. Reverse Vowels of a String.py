@@ -23,7 +23,7 @@ Complexity:
 
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        
+
         # Get length of s
         n = len(s)
 
@@ -51,7 +51,7 @@ class Solution:
 
             # Swap both vowels
             s[l], s[r] = s[r], s[l]
-            
+
             # Update both pointers
             l, r = l + 1, r - 1
 
