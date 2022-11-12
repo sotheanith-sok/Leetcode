@@ -28,7 +28,7 @@ Problem:
 Solution:
     Use two heaps to solve this problem. Divide incoming numbers into two partition. Use maxHeap to store all numbers in the left partition and minHeap to store all numbers in the right parition. 
     
-    Then, we will add a new number to the lesser(size) of the two heaps and swap their first values until the first value of the minHeap is greater than or equal to the first value of the maxHeap. 
+    Then, we will add a new number to the lesser (size wise) of the two heaps and swap their first values until the first value of the maxHeap is less than or equal to the first value of the minHeap.
 
 Complexity:
     Time: O(nlogn)
