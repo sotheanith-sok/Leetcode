@@ -29,7 +29,15 @@ Solution:
     1. For the first buy, we can keep track of the minimum price and subtract it with the current price. Then, we store the largest difference which will be the profit from the first buy.
 
     2. For the second buy, we will do the same but we also consider the profit of the first buy. The cost of the second buy is the minimum price subtract the profit from the first buy. Then, we will maximum the profit similarly to the first case. 
+    Cost of second buy will always be the same as cost of the first buy unless the profit of the first sell is able to offset the cost of the second buy to be lesser than the cost of first buy. This ensure that we won't make the second buy unless it is profitable.
 
+    Ex: arr = [1, 100, 2, 25]
+        price   cost1   profit1     cost2   profit2
+        1       1       0           1       0
+        100     1       99          1       99
+        2       1       99          -97     99
+        25      1       99          -97     122
+        
 Complexity:
     Time: O(n)
     Space: O(1)
@@ -41,28 +49,28 @@ class Solution:
     def maxProfit(self, prices: list[int]) -> int:
 
         # Initialize the cost of first and second buy
-        costOneBuy, costTwoBuy = inf, inf
+        firstCost, secondCost = inf, inf
 
         # Initialize the profit of first and second sell
-        profitOneSell, profitTwoSell = 0, 0
+        firstProfit, secondProfit = 0, 0
 
         # Iterate through all prices
         for price in prices:
 
             # Update the cost of the first buy
-            costOneBuy = min(costOneBuy, price)
+            firstCost = min(firstCost, price)
 
             # Update the profit on the first sell
-            profitOneSell = max(profitOneSell, price - costOneBuy)
+            firstProfit = max(firstProfit, price - firstCost)
 
             # Update the cost of the second buy inluding the profit of the first sell
             # Cost of second buy will always be the same as cost of the first buy unless the profit of the first sell is able to offset the cost of the second buy to be lesser than the cost of first buy.
             # This ensure that we won't make the second buy unless it is profitable.
-            costTwoBuy = min(costTwoBuy, price - profitOneSell)
+            secondCost = min(secondCost, price - firstProfit)
 
             # Update the profit of the second sell
-            profitTwoSell = max(profitTwoSell, price - costTwoBuy)
+            secondProfit = max(secondProfit, price - secondCost)
 
-        return profitTwoSell
+        return secondProfit
 
 
