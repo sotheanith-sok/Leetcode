@@ -50,6 +50,9 @@ Complexity:
 """
 
 # Definition for a binary tree node.
+from functools import lru_cache
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -61,10 +64,12 @@ class Solution:
     def countNodes(self, root: TreeNode) -> int:
 
         # Find the height of the left side
+        @lru_cache(None)
         def leftHeight(node):
             return 0 if not node else 1 + leftHeight(node.left)
 
         # Find the height of the right side
+        @lru_cache(None)
         def rightHeight(node):
             return 0 if not node else 1 + rightHeight(node.right)
 
