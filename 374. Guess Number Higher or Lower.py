@@ -26,7 +26,7 @@ Problem:
     Output: 1
 
 Solution:
-    We will use binary search to solve this problem.
+    Use binary learn to find the target num between 1 and n
 
 Complexity:
     Time: O(logn)
@@ -41,21 +41,18 @@ Complexity:
 # def guess(num: int) -> int:
 
 
-def guess(num: int) -> int:
-    pass
-
-
 class Solution:
     def guessNumber(self, n: int) -> int:
         l, r = 1, n
 
         while l <= r:
-            m = (l + r) // 2
-            res = guess(m)
-            if res == 0:
-                return m
-            elif res < 0:
-                r = m - 1
-            else:
-                l = m + 1
+            mid = (r - l) // 2 + l
+            res = guess(mid)
 
+            if res == 0:
+                return mid
+
+            if res == -1:
+                r = mid - 1
+            else:
+                l = mid + 1
