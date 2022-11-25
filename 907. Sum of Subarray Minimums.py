@@ -15,16 +15,19 @@ Problem:
     Output: 444
 
 Solution:
-    Use monotonically decreasing stack to solve this problem. Iterate through all numbers. At each iteration, we will add the number into the monotonically decreasing stack. Then, we can calculate the sum of all subarray ending at such number. In order to avoid repeated calculation, we will maintain a variable for such sum and update it as we add and remove values from the monotonic stack. 
+    Use monotonically decreasing stack to solve this problem. Iterate through all numbers. At each iteration, we will add the number into the monotonically decreasing stack. Then, we can calculate the sum of all subarray ending at such number. Lastly, we just accumulate the sum into the result.
+    
+    In order to avoid repeated calculation, we will maintain a variable for such sum and update it as we add and remove values from the monotonic stack. 
 
     Ex: arr = [3,1,2,4]
 
-    i   num     stack                               pRes        res
+    i   num     stack(index, num)                   pRes        res
     -1  0       [(-1,0)]                            0           0
     0   3       [(-1, 0), (0, 3)]                   3           3
     1   1       [(-1, 0), (1, 1)]                   2           5
     2   2       [(-1, 0), (1, 1), (2, 2)]           4           9
     3   4       [(-1, 0), (1, 1), (2, 2), (3, 4)]   8           17
+
 
 Complexity:
     Time: O(n)
