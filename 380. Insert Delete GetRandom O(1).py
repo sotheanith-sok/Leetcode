@@ -74,11 +74,12 @@ class RandomizedSet:
         # Update the hashmap such that the last value in the list points index of the current value.
         self.map[self.list[-1]] = self.map[val]
 
+        # Remove val from the map and pop the last value from the list.
+        index = self.map.pop(val)
+
         # Update the list such that the value at the end of the list override the value at the index of the current value.
         self.list[index] = self.list[-1]
 
-        # Remove val from the map and pop the last value from the list.
-        index = self.map.pop(val)
         self.list.pop()
 
         return True
