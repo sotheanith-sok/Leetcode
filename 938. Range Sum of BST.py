@@ -36,7 +36,7 @@ class Solution:
 
         # Sum up all nodes while maintain a range of such tree
         def dfs(node, cLow, cHigh):
-            
+
             # If there isn't a node or the current tree is range outside the target range, return 0
             if not node or cHigh < low or cLow > high:
                 return 0
@@ -49,5 +49,3 @@ class Solution:
             )
 
         return dfs(root, -inf, inf)
-
-
