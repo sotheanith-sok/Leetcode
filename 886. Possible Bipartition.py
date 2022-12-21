@@ -18,9 +18,9 @@ Problem:
     Output: false
 
 Solution:
-    A group of nodes can be divided into at most two groups where each group contains no pair of nodes that are incompatible if we can traverse the graph and there are no two adjacent nodes belonging to the same group. 
+    A group of nodes can be divided into at most two groups where each group contains no pair of nodes that are incompatible if we can traverse the graph to mark all nodes and there are no two adjacent nodes belonging to the same group.
 
-    Start by building an adjacency list using the "dislikes" as edges. Then, visit all nodes using dfs and mark them as belonging to a group that is the opposite of its parent node. Continue to mark next node as long as it has not been marked yet. If we encounter a next node that has been marked and its color is identical to the current node, we return False as there is no way to divide nodes into at most two groups. 
+    Start by building an adjacency list using the "dislikes" as edges. Then, visit all nodes using dfs and mark them as belonging to a group that is the opposite of its parent node. Continue to mark next node as long as it has not been marked yet. If we encounter a next node that has been marked and it belongs to the same group as the current node, we return False as there is no way to divide nodes into at most two groups.
 
 Complexity:
     Time: O(V + E)
