@@ -50,11 +50,11 @@ class Solution:
                 # Return 1 if we filled all cells perfectly else 0
                 return 1 if i == n and extrude == 0 else 0
 
-            # 4 possible tiles: ┃ and ┏━ and ┗━
+            # 4 possible tiles: ┃ and ┏━ and ┗━ and ━━
             if extrude == 0:
                 return dp(i + 1, 0) + 2 * dp(i + 1, 1) + dp(i, 2)
 
-            # 3 possible tiles: (━┓ or ━┛) and ━━
+            # 3 possible tiles: ━━ and (━┓ or ━┛)
             if extrude == 1:
                 return dp(i + 1, 1) + dp(i + 2, 0)
 
