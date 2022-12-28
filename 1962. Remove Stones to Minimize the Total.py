@@ -27,7 +27,7 @@ Problem:
     The total number of stones in [2,3,3,4] is 12.
 
 Solution:
-    We can be greedy here. Start by creating a max heap of piles and continue to perform the operation on the pile on top of the heap for k times. Then, return the sum of all piles in the heap. 
+    Start by creating a max heap of piles and continue to perform the operation on the pile on top of the heap for k times. Then, return the sum of all piles in the heap. 
 
 Complexity:
     Time: O(klogn)
