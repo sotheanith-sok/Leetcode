@@ -24,7 +24,7 @@ Problem:
     Explanation: The boy can buy all the ice cream bars for a total price of 1 + 6 + 3 + 1 + 2 + 5 = 18.
 
 Solution:
-    Sort all costs in an ascending order. Count how many ice-creams we can buy given a certain amount of coints. 
+    Buy as much ice cream as possible starting from the cheapest one first.
 
 Complexity:
     Time: O(nlogn)
@@ -32,26 +32,22 @@ Complexity:
 """
 
 
+import heapq
+
+
 class Solution:
     def maxIceCream(self, costs: list[int], coins: int) -> int:
 
-        # Sort costs
-        costs.sort()
+        # Create the min heap from costs
+        heapq.heapify(costs)
 
         # Initialize the result
         res = 0
 
-        # Iterate through all cost
-        for cost in costs:
-
-            # Update the coin
-            coins -= cost
-
-            # If coins reach negative, we know that we are overspend
-            if coins < 0:
-                break
-
-            # Else, increment the result
+        # Continue to buy the cheapest ice cream as long as we have enough coin
+        while costs and costs[0] <= coins:
+            coins -= heapq.heappop(costs)
             res += 1
 
+        # Return the number of ice cream bought
         return res
