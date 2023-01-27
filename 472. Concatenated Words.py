@@ -51,6 +51,10 @@ class Solution:
             # Iterate through all possible lengths of a prefix
             for length in lengths:
 
+                # If the length of the prefix is greater than the length of the current word, skip it
+                if length > len(word):
+                    continue
+
                 # Split a word into prefix and suffix
                 prefix, suffix = word[:length], word[length:]
 
