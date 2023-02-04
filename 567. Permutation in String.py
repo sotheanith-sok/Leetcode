@@ -25,6 +25,7 @@ from collections import Counter
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
+        
         # Count chracters in s1
         target = Counter(s1)
 
