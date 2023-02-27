@@ -52,7 +52,7 @@ Solution:
     Start by building a prefix sum so that we can find the sum of all values in any subgrid in constant time. Then, we will continue to divide the grid into 4 subgrids until each subgrid contains all zeros or ones. Return the root node.
 
 Complexity:
-    Time: O(4^n)
+    Time: O(n^2)
     Space: O(n^2)
 """
 
